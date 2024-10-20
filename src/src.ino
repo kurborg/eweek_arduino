@@ -1,4 +1,11 @@
+#include <QTRSensors.h>
+
 #include <Arduino.h>
+
+
+// create an object for four QTR-xRC sensors on digital pins 0 and 9, and on analog
+// inputs 1 and 3 (which are being used as digital inputs 15 and 17 in this case)
+QTRSensorsRC qtrrc((unsigned char[]) {0, 9, 15, 17}, 4);
 
 const int sensorPins[] = {2, 3, 4, 5, 6, 7, 8, 9};
 
