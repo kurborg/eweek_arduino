@@ -20,6 +20,13 @@
 1. If you hit the upload (arrow button) on a basic file with an empty setup{} and loop{} you should see the 2 LED's labeled TX and RX flash rapidly indicating that a connection is made to the host and data is being transferred
 
 
+## Install Libraries
+
+[https://www.pololu.com/docs/0J19/2](https://www.pololu.com/docs/0J19/2)
+
+!["Install QTR Sensor Libraries"](.img/qtrLibrary.png)
+
+
 ## Examples
 1. In the Arduino IDE, examples can be found under File->Examples
 1. Open a basic blink example in File->Examples->0.1Basics->Blink
