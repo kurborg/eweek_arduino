@@ -41,9 +41,9 @@ const int pw[NUM_OBJECTS] =
 
 // Pin Assignments
 const int LED0 = 6;
-const int LED1 = 1;
-const int LED2 = 3;
-const int LED3 = 4;
+const int LED1 = 4;
+const int LED2 = 10;
+const int LED3 = 8;
 const int IR_Sense = 2;
 
 // Helper Variables
@@ -60,10 +60,10 @@ const int tol = 4;  // 4 millisecond tolerance for detected pulse widths
 void setup()
 {
   // Configure GPIO Pins
-  pinMode(LED0,     OUTPUT);
-  pinMode(LED1,     OUTPUT);
-  pinMode(LED2,     OUTPUT);
-  pinMode(LED3,     OUTPUT);
+  pinMode(LED0,     OUTPUT); // COIN
+  pinMode(LED1,     OUTPUT); // MUSHROOM
+  pinMode(LED2,     OUTPUT); // FIREFLOWER
+  pinMode(LED3,     OUTPUT); // ICEFLOWER
   pinMode(IR_Sense, INPUT);
 
   // Attach interrupt to IR sensor output pin
