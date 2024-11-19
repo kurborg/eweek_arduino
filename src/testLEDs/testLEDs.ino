@@ -1,9 +1,11 @@
 // Pin Assignments
-const int LED0 = 6;
-const int LED1 = 4;
-const int LED2 = 10;
-const int LED3 = 8;
+const int LED0 = 6; // COIN
+const int LED1 = 4; // MUSHROOM
+const int LED2 = 10; // FIREFLOWER
+const int LED3 = 8; // ICEFLOWER
 // const int IR_Sense = 2;
+
+const int DELAY = 2000;
 
 void setup() {
   // put your setup code here, to run once:
@@ -15,7 +17,7 @@ void setup() {
   // pinMode(IR_Sense, INPUT);
 
   // Enable Serial Monitor at 9600 baud rate
-  // Serial.begin(9600);
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -26,7 +28,7 @@ void loop() {
     digitalWrite(LED2, LOW);
     digitalWrite(LED3, LOW);
 
-    delay(1000);
+    delay(DELAY); // Makes light stay ON for 5 seconds
 
     Serial.println("MUSHROOM");
     digitalWrite(LED0, LOW);
@@ -34,7 +36,7 @@ void loop() {
     digitalWrite(LED2, LOW);
     digitalWrite(LED3, LOW);
 
-    delay(1000);
+    delay(DELAY); // Makes light stay ON for 5 seconds
 
     Serial.println("FIREFLOWER");
     digitalWrite(LED0, LOW);
@@ -42,7 +44,7 @@ void loop() {
     digitalWrite(LED2, HIGH);
     digitalWrite(LED3, LOW);
 
-    delay(1000);
+    delay(DELAY); // Makes light stay ON for 5 seconds
 
     Serial.println("ICEFLOWER");
     digitalWrite(LED0, LOW);
@@ -50,5 +52,5 @@ void loop() {
     digitalWrite(LED2, LOW);
     digitalWrite(LED3, HIGH);
 
-    delay(1000);
+    delay(DELAY); // Makes light stay ON for 5 seconds
 }
