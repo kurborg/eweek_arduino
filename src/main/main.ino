@@ -40,10 +40,10 @@ const int pw[NUM_OBJECTS] =
   {20,40,60,80};
 
 // Pin Assignments
-const int LED0 = 6;
-const int LED1 = 4;
-const int LED2 = 10;
-const int LED3 = 8;
+const int LED0 = 6; // COIN
+const int LED1 = 4; // MUSHROOM
+const int LED2 = 10; // FIREFLOWER
+const int LED3 = 8; // ICEFLOWER
 const int IR_Sense = 2;
 
 // Helper Variables

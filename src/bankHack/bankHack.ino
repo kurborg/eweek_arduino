@@ -16,7 +16,7 @@ void loop() {
     for (int j = 0; j < numPossibleValues; j++) {
       password[i] = j;
       String passwordStr = "";
-      for (int k = i + 1; k < numDigits; k++) {
+      for (int k = 0; k < numDigits; k++) {
         passwordStr += String(password[k]);
       }
       passwordStr += "\n";
