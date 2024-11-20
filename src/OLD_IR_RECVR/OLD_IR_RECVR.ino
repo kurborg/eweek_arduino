@@ -16,7 +16,7 @@
 // The challenge team shall detect the missing or faulty component and complete the circuit to light up the LED
 // Points shall be awarded for solving problems of increasing difficulty
 
-const NUM_OBJECTS = 4;
+const int NUM_OBJECTS = 4;
 
 enum OBJECT_TYPE
 {
@@ -67,7 +67,7 @@ void setup()
   pinMode(IR_Sense, INPUT);
 
   // Attach interrupt to IR sensor output pin
-  attachInterrupt(digitalPinToInterrupt(IR_Sense), getPulseWidth, CHANGE);
+  // attachInterrupt(digitalPinToInterrupt(IR_Sense), getPulseWidth, CHANGE);
 
   // Enable Serial Monitor at 9600 baud rate
   Serial.begin(9600);
@@ -98,7 +98,7 @@ void loop()
   }
 
   // 2 - MUSHROOM
-  if((duration_ms >= (pw[MUSHROOM] - tol)) && (duration_ms <= (pw[MUSHROOM] + tol)))
+  else if((duration_ms >= (pw[MUSHROOM] - tol)) && (duration_ms <= (pw[MUSHROOM] + tol)))
   {
     Serial.println("MUSHROOM - 20ms");
     digitalWrite(LED0, LOW);
@@ -108,7 +108,7 @@ void loop()
   }
 
   // 3 - FIREFLOWER
-  if((duration_ms >= (pw[FIREFLOWER] - tol)) && (duration_ms <= (pw[FIREFLOWER] + tol)))
+  else if((duration_ms >= (pw[FIREFLOWER] - tol)) && (duration_ms <= (pw[FIREFLOWER] + tol)))
   {
     Serial.println("FIREFLOWER - 30ms");
     digitalWrite(LED0, LOW);
@@ -118,7 +118,7 @@ void loop()
   }
 
   // 4 - ICEFLOWER
-  if((duration_ms >= (pw[ICEFLOWER] - tol)) && (duration_ms <= (pw[ICEFLOWER] + tol)))
+  else if((duration_ms >= (pw[ICEFLOWER] - tol)) && (duration_ms <= (pw[ICEFLOWER] + tol)))
   {
     Serial.println("ICEFLOWER - 40ms");
     digitalWrite(LED0, LOW);
@@ -126,11 +126,31 @@ void loop()
     digitalWrite(LED2, LOW);
     digitalWrite(LED3, HIGH);
   }
+
+  // No Matching Frequency
+  else
+  {
+    Serial.println("No Matching Frequency");
+    digitalWrite(LED0, HIGH);
+    digitalWrite(LED1, HIGH);
+    digitalWrite(LED2, HIGH);
+    digitalWrite(LED3, HIGH);
+  }
+
+  delay(1000);
+
+  Serial.println(pulseIn(IR_Sense,LOW));
+
+  digitalWrite(LED0, LOW);
+  digitalWrite(LED1, LOW);
+  digitalWrite(LED2, LOW);
+  digitalWrite(LED3, LOW);
 }
 
 // ------------------------------------------------------------------------------
 // getPulseWidth: Interrupt function called when IR Sensor Output signal changes
 // ------------------------------------------------------------------------------
+// TODO DON"T OVERCOMPLICATE USE pulseIn(PIN,LOW)
 void getPulseWidth()
 {
   if(digitalRead(IR_Sense))  // IR Sensor Signal is high

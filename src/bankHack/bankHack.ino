@@ -1,11 +1,21 @@
 #include <Arduino.h>
+#include <SoftwareSerial.h>
 
 const int numDigits = 8; // TODO: Change to 2 when running bank tests
 const int numPossibleValues = 10;
 const int bankDelay = 300; // TODO: Change to correct bank delay (number of milliseconds to pause)
 
+// Define the TX and RX pins
+const int txPin = 2;
+const int rxPin = 3;
+
+
 void setup() {
-  Serial.begin(9600);
+
+  // Create a SoftwareSerial object
+  SoftwareSerial serial(txPin, rxPin);
+  
+  serial.begin(9600);
 }
 
 void loop() {
@@ -20,9 +30,9 @@ void loop() {
         passwordStr += String(password[k]);
       }
       passwordStr += "\n";
-      Serial.println(passwordStr); // TODO: maybe need to change how the bank is reading our input
+      serial.println(passwordStr); // TODO: maybe need to change how the bank is reading our input
       delay(bankDelay); // wait for the Bank to respond
-      int response = Serial.parseInt();
+      int response = serial.parseInt();
       if (response > correctDigits) {
         correctDigits = response;
         break; // move on to the next digit
@@ -31,5 +41,5 @@ void loop() {
   }
 
   // password is correct!
-  Serial.println("Password is correct!");
+  serial.println("Password is correct!");
 }
