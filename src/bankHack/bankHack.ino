@@ -1,28 +1,30 @@
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 
-const int numDigits = 8; // TODO: Change to 2 when running bank tests
+const int numDigits = 8;
 const int numPossibleValues = 10;
-const int bankDelay = 300; // TODO: Change to correct bank delay (number of milliseconds to pause)
+const int bankDelay = 100; // TODO: Change to correct bank delay (number of milliseconds to pause)
 
 // Define the TX and RX pins
-const int txPin = 12;
-const int rxPin = 13;
+const int txPin = 12; // BLUE
+const int rxPin = 13; // RED
 
 // Create a SoftwareSerial object
 SoftwareSerial serial(txPin, rxPin);
 
-
 void setup() {
 
   serial.begin(9600);
+  Serial.begin(9600);
 }
 
 void loop() {
-  int password[numDigits];
+  int password[numDigits] = {0};
   int correctDigits = 0;
 
   for (int i = 0; i < numDigits; i++) {
+    bool digitFound = false; // Flag to check if the current digit has been found
+
     for (int j = 0; j < numPossibleValues; j++) {
       password[i] = j;
       String passwordStr = "";
@@ -36,26 +38,39 @@ void loop() {
 
       // Wait for the Bank to respond
       delay(bankDelay);
-
       // Retreive Banks response
       int response = serial.parseInt();
 
-      // If response comes back as String then convert
-      //////////////////////////////////////
-      //    // Read the entire incoming string
-      //String incomingString = Serial.readString();
-    
-      // Convert the string to an integer
-      // int incomingValue = incomingString.toInt();
-      //////////////////////////////////////
+      Serial.println("###################################");
+      
+      Serial.println("passwordStr");
+      Serial.println(passwordStr);
+
+      Serial.println("RESPONSE");
+      Serial.println(response);
+
+      Serial.println("correctDigits");
+      Serial.println(correctDigits);
+
+      Serial.println("digitFound");
+      Serial.println(digitFound);
+
+      Serial.println("###################################");
+
 
       if (response > correctDigits) {
         correctDigits = response;
+        digitFound = true;
         break; // move on to the next digit
       }
+
+    }
+    if (!digitFound) {
+      i--;  // Decrease the digit index to retry the current digit
     }
   }
 
   // password is correct!
   serial.println("Password is correct!");
+  delay(5000);
 }
